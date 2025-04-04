@@ -1,28 +1,18 @@
 {
-    "name": "mindaid",
+    "name": "vapi-test-app",
     "version": "1.0.0",
-    "description": "MindAid - Your AI Life Coach",
-    "main": "index.js",
-    "type": "module",
-    "engines": {
-        "node": "18.x"
-    },
+    "main": "script.js",
     "scripts": {
-        "start": "node server.js",
-        "dev": "node server.js",
-        "build": "node build.js",
-        "vercel-build": "node build.js"
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
     },
-    "keywords": [
-        "ai",
-        "coach",
-        "mindaid"
-    ],
+    "keywords": [],
     "author": "",
-    "license": "MIT",
-    "dependencies": {
-        "@supabase/supabase-js": "^2.39.6",
-        "express": "^4.18.2",
-        "serve-static": "^1.15.0"
-    }
+    "license": "ISC",
+    "devDependencies": {
+        "@vapi-ai/web": "^2.2.5",
+        "vite": "^5.0.0"
+    },
+    "description": ""
 }
