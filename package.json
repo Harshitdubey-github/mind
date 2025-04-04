@@ -1,0 +1,28 @@
+{
+    "name": "mindaid",
+    "version": "1.0.0",
+    "description": "MindAid - Your AI Life Coach",
+    "main": "index.js",
+    "type": "module",
+    "engines": {
+        "node": "18.x"
+    },
+    "scripts": {
+        "start": "node server.js",
+        "dev": "node server.js",
+        "build": "node build.js",
+        "vercel-build": "node build.js"
+    },
+    "keywords": [
+        "ai",
+        "coach",
+        "mindaid"
+    ],
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "@supabase/supabase-js": "^2.39.6",
+        "express": "^4.18.2",
+        "serve-static": "^1.15.0"
+    }
+}

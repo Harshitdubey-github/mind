@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deploy MindAid to Supabase</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #9966ff;
+            text-align: center;
+        }
+        h2 {
+            color: #43cea2;
+            margin-top: 30px;
+        }
+        button {
+            background: linear-gradient(90deg, #9966ff 0%, #43cea2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 20px auto;
+            display: block;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+        }
+        #output {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            height: 300px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .success {
+            color: #43cea2;
+            font-weight: bold;
+        }
+        .error {
+            color: #ff6584;
+            font-weight: bold;
+        }
+        .warning {
+            color: #ffa500;
+            font-weight: bold;
+        }
+        .manual-steps {
+            background-color: #f9f9f9;
+            border-left: 4px solid #43cea2;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .manual-steps h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .manual-steps ol {
+            padding-left: 20px;
+        }
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Deploy MindAid to Supabase</h1>
+    <p>Click the button below to deploy your MindAid app to Supabase Storage.</p>
+    
+    <button id="deployBtn">Deploy to Supabase</button>
+    
+    <h2>Deployment Log:</h2>
+    <div id="output">Waiting to start deployment...</div>
+    
+    <div class="manual-steps">
+        <h3>Manual Deployment Steps (if automatic deployment fails)</h3>
+        <ol>
+            <li>Log in to your <a href="https://app.supabase.com" target="_blank">Supabase Dashboard</a></li>
+            <li>Navigate to <strong>Storage → Buckets</strong></li>
+            <li>Click <strong>"Create Bucket"</strong> and name it <code>mindaid-app</code></li>
+            <li>Make sure to check <strong>"Public Bucket"</strong> option</li>
+            <li>Click on the newly created bucket</li>
+            <li>Click <strong>"Upload File"</strong> and upload all the following files:
+                <ul>
+                    <li>index.html</li>
+                    <li>actions.html</li>
+                    <li>journal.html</li>
+                    <li>scripts.js</li>
+                    <li>config.js</li>
+                </ul>
+            </li>
+            <li>After uploading, access your app at:<br>
+                <code>https://[your-project-url].supabase.co/storage/v1/object/public/mindaid-app/index.html</code>
+            </li>
+        </ol>
+    </div>
+    
+    <script type="module">
+        // Override console.log to capture output
+        const outputDiv = document.getElementById('output');
+        const originalConsoleLog = console.log;
+        const originalConsoleError = console.error;
+        const originalConsoleWarn = console.warn;
+        
+        console.log = function(...args) {
+            originalConsoleLog.apply(console, args);
+            outputDiv.innerHTML += `<div>${args.join(' ')}</div>`;
+            outputDiv.scrollTop = outputDiv.scrollHeight;
+        };
+        
+        console.error = function(...args) {
+            originalConsoleError.apply(console, args);
+            outputDiv.innerHTML += `<div class="error">ERROR: ${args.join(' ')}</div>`;
+            outputDiv.scrollTop = outputDiv.scrollHeight;
+        };
+        
+        console.warn = function(...args) {
+            originalConsoleWarn.apply(console, args);
+            outputDiv.innerHTML += `<div class="warning">WARNING: ${args.join(' ')}</div>`;
+            outputDiv.scrollTop = outputDiv.scrollHeight;
+        };
+        
+        document.getElementById('deployBtn').addEventListener('click', async () => {
+            outputDiv.innerHTML = ''; // Clear previous output
+            console.log('Starting deployment process...');
+            
+            try {
+                // Import the deployment script
+                await import('./supabase-deploy.js');
+            } catch (error) {
+                console.error('Deployment failed:', error.message || error);
+                console.log('\nPlease try the manual deployment steps below if automatic deployment fails.');
+            }
+        });
+    </script>
+</body>
+</html> 

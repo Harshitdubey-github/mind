@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindAid - Actions</title>
+    <style>
+        :root {
+            --primary: #9966ff;
+            --secondary: #43cea2;
+            --dark: #333333;
+            --light: #ffffff;
+            --gradient: linear-gradient(90deg, #9966ff 0%, #43cea2 100%);
+            --gray: #f5f5f5;
+            --text-primary: #2e384d;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--gray);
+            min-height: 100vh;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 1.2rem;
+            text-align: left;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .app-icon {
+            width: 32px;
+            height: 32px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+        }
+        
+        .header-content h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        
+        .tagline {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+        
+        main {
+            flex: 1;
+            padding: 1rem;
+            width: 100%;
+            background-color: var(--gray);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .card h2 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .action-list {
+            list-style: none;
+        }
+        
+        .action-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .action-item:last-child {
+            border-bottom: none;
+        }
+        
+        .action-check {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--primary);
+            border-radius: 50%;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            background-color: white;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .action-check.completed {
+            background-color: var(--primary);
+        }
+        
+        .action-text {
+            flex: 1;
+        }
+        
+        .action-title {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .action-description {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 2rem 0;
+            color: #999;
+        }
+        
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ccc;
+        }
+        
+        .nav-bar {
+            display: flex;
+            justify-content: space-around;
+            background-color: white;
+            padding: 0.8rem 0;
+            position: sticky;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid #eee;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #999;
+            text-decoration: none;
+            font-size: 0.7rem;
+        }
+        
+        .nav-item.active {
+            color: var(--primary);
+        }
+        
+        .nav-icon {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="app-icon">
+            <i class="fas fa-brain"></i>
+        </div>
+        <div class="header-content">
+            <h1>MindAid</h1>
+            <p class="tagline">Your personal guide to a better you</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="card">
+            <h2>Action Items</h2>
+            
+            <div class="empty-state">
+                <i class="fas fa-clipboard-check empty-icon"></i>
+                <p>No action items yet</p>
+                <p>Talk to your AI coach to get personalized actions</p>
+            </div>
+            
+            <!-- Sample actions would appear here when available -->
+            <ul class="action-list" style="display: none;">
+                <li class="action-item">
+                    <div class="action-check">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="action-text">
+                        <div class="action-title">Morning meditation</div>
+                        <div class="action-description">10 minutes of mindfulness to start your day</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <nav class="nav-bar">
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-microphone nav-icon"></i>
+            <span>AI Coach</span>
+        </a>
+        <a href="actions.html" class="nav-item active">
+            <i class="fas fa-check nav-icon"></i>
+            <span>Actions</span>
+        </a>
+        <a href="journal.html" class="nav-item">
+            <i class="fas fa-book nav-icon"></i>
+            <span>Journal</span>
+        </a>
+    </nav>
+
+    <script>
+        // This page doesn't need any specific functionality yet
+        // It's just a placeholder for actions that would come from the AI coach
+    </script>
+</body>
+</html> 

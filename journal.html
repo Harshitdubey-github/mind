@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindAid - Journal</title>
+    <style>
+        :root {
+            --primary: #9966ff;
+            --secondary: #43cea2;
+            --dark: #333333;
+            --light: #ffffff;
+            --gradient: linear-gradient(90deg, #9966ff 0%, #43cea2 100%);
+            --gray: #f5f5f5;
+            --text-primary: #2e384d;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--gray);
+            min-height: 100vh;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 1.2rem;
+            text-align: left;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .app-icon {
+            width: 32px;
+            height: 32px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+        }
+        
+        .header-content h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        
+        .tagline {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+        
+        main {
+            flex: 1;
+            padding: 1rem;
+            width: 100%;
+            background-color: var(--gray);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .card h2 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .journal-entry {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .journal-entry:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .journal-date {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .journal-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        .journal-content {
+            font-size: 0.9rem;
+            color: #444;
+        }
+        
+        .new-entry-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            box-shadow: 0 4px 8px rgba(153, 102, 255, 0.3);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .new-entry-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 2rem 0;
+            color: #999;
+        }
+        
+        .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ccc;
+        }
+        
+        .nav-bar {
+            display: flex;
+            justify-content: space-around;
+            background-color: white;
+            padding: 0.8rem 0;
+            position: sticky;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid #eee;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #999;
+            text-decoration: none;
+            font-size: 0.7rem;
+        }
+        
+        .nav-item.active {
+            color: var(--primary);
+        }
+        
+        .nav-icon {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="app-icon">
+            <i class="fas fa-brain"></i>
+        </div>
+        <div class="header-content">
+            <h1>MindAid</h1>
+            <p class="tagline">Your personal guide to a better you</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="card">
+            <h2>Journal Entries</h2>
+            
+            <div class="empty-state">
+                <i class="fas fa-book empty-icon"></i>
+                <p>No journal entries yet</p>
+                <p>Record your thoughts and progress</p>
+            </div>
+            
+            <!-- Sample journal entries would appear here when available -->
+            <div class="journal-entries" style="display: none;">
+                <div class="journal-entry">
+                    <div class="journal-date">June 12, 2023 · 10:25 AM</div>
+                    <div class="journal-title">Morning Reflection</div>
+                    <div class="journal-content">Today I'm feeling motivated to take on new challenges. The AI coach suggested some great breathing exercises that have really helped with my anxiety.</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <button class="new-entry-button">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <nav class="nav-bar">
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-microphone nav-icon"></i>
+            <span>AI Coach</span>
+        </a>
+        <a href="actions.html" class="nav-item">
+            <i class="fas fa-check nav-icon"></i>
+            <span>Actions</span>
+        </a>
+        <a href="journal.html" class="nav-item active">
+            <i class="fas fa-book nav-icon"></i>
+            <span>Journal</span>
+        </a>
+    </nav>
+
+    <script>
+        // This page doesn't need any specific functionality yet
+        // It's just a placeholder for journal entries
+    </script>
+</body>
+</html> 
